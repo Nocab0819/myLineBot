@@ -12,14 +12,14 @@ from linebot.models import (
 
 import openai
 import os
-openai.api_key = "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"
+openai.api_key = os.environ["OPENAI_API_KEY"]
 model_engine = "text-davinci-003"
 output_length = 500
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('F3iWzws3ypon002uN+swy+EBDOsVnjl79FXkhKkd4Ev7ZfBGixANYB9kSuSNLX/GhbiPirq/w8AD2Bo8O4Ctp/Bq3EXGluy0DseZR4+zCF9jsgoqsjEYVhsCSfpLZ3HEA+5UcrajxljyahU/audoKgdB04t89/1O/w1cDnyilFU=')
-webhook_handler = WebhookHandler('c1e3f01970d9f2828273807a3b9cab6e')
+line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
+webhook_handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 
 @app.route("/")
 def home():

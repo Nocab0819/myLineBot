@@ -2,8 +2,7 @@ import openai
 import os
 
 # 設定 OpenAI API 密鑰
-# openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.api_key = "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"
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 # 輸入文本
 input_text = "請用中文說一個好笑的笑話"
