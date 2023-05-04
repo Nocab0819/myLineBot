@@ -10,6 +10,12 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
+import openai
+import os
+openai.api_key = "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"
+model_engine = "text-davinci-003"
+output_length = 500
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('F3iWzws3ypon002uN+swy+EBDOsVnjl79FXkhKkd4Ev7ZfBGixANYB9kSuSNLX/GhbiPirq/w8AD2Bo8O4Ctp/Bq3EXGluy0DseZR4+zCF9jsgoqsjEYVhsCSfpLZ3HEA+5UcrajxljyahU/audoKgdB04t89/1O/w1cDnyilFU=')
@@ -40,9 +46,15 @@ def callback():
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    response = openai.Completion.create(
+        engine=model_engine,
+        prompt=event.message.text,
+        max_tokens=output_length,
+    )
+    output_text = response.choices[0].text.strip()
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=output_text))
 
 
 if __name__ == "__main__":
